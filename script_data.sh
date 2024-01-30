@@ -29,6 +29,7 @@ schwellenwert4=20
 check_and_notify() {
   local datei=$1
   local schwellenwert=$2
+  local benachrichtigung_satz=$3
 
 # Überprüfe, ob die Datei existiert
   if [ -e "$datei" ]; then
@@ -37,7 +38,7 @@ check_and_notify() {
 
     # Überprüfe, ob der Wert zu hoch ist
     if [ "$wert" -gt "$schwellenwert" ]; then
-      nachricht="In Datei $datei ist der Wert zu hoch: $wert (Schwellenwert: $schwellenwert)"
+      nachricht="In Datei $datei ist der Wert zu hoch: $wert (Schwellenwert: $benachrichtigung_satz)"
       send_email "$nachricht"
     fi
   else
@@ -48,10 +49,11 @@ check_and_notify() {
     if [ "$wert" -lt "$schwellenwert" ]; then
     nachricht="Der Wert ist nicht zu hoch"
     send_mail "$nachricht"
+  fi
 }
 
-# Rufe die Funktion für jede Datei auf
-check_and_notify "/home/pi/logs/data_hum.txt" 50
-check_and_notify "/home/pi/logs/data_light.txt" 30
-check_and_notify "/home/pi/logs/data_sound.txt" 300
-check_and_notify "home/pi/logs/data_temp.txt" 20
+# Dateien, Schwellenwerte und Benachrichtigungssätze
+check_and_notify "/home/pi/logs/data_hum.txt" 50 "Warnung: Wert in Datei 1 ist zu hoch!"
+check_and_notify "/home/pi/logs/data_light.txt" 30 "Achtung: Wert in Datei 2 überschreitet die Grenze!"
+check_and_notify "/home/pi/logs/data_sound.txt" 300  "Hinweis: Der Wert in Datei 3 ist erhöht."
+check_and_notify "home/pi/logs/data_temp.txt" 20 "Meldung: Wert in Datei 4 sollte überprüft werden."
