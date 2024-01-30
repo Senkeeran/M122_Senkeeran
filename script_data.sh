@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#Autor: Senkeeran Paranthaman
+#Datum: 30.1.2024
+#Version: 1.3
+#Beschreibung:
+"Dieses Skript liesst die Log Dateien, die im gleichem Verzeichnis abgespeichert.
+In diesen Log Dateien werden die Daten von den Sensoren vom Server gespeichert.
+Das Skript hat für jede Log Datei einen eigenen Schwellenwert, falls dieser Schwellenwert
+überschritten wird, wird per E-Mail eine Nachricht verschickt."
+
 # E-Mail Konfiguration
 empfaenger_email="senkeeran.paranthaman@edu.tbz.ch"
 betreff="Warnung: Wert zu hoch"
